@@ -1,51 +1,77 @@
 # FACIAL RECOGNITION PROJECT
 
-## Using face_recognition package
+## Description:
+There are many ways to solve the face recognition problem. In this project I will try to solve it in 2 different ways to see which is the best approach for this project.
 
-### Package summary:
-- Recognize and manipulate faces from Python with the world's simplest face recognition library
-- Built using [dlib](http://dlib.net/)'s state-of-the-art face recognition built with deep learning. The model has an accuracy of 99.38% on the [Labeled Faces in the Wild](http://vis-www.cs.umass.edu/lfw/) benchmark.
-- Go to this [link](https://github.com/ageitgey/face_recognition) for more information
-### Some main features:
-- Find faces in picture:
+- First approach: Using OpenCV, YOLO and Deep learning models
+- Second approach: Using OpenCV, [face_recognition](https://github.com/ageitgey/face_recognition) package
+
+## Data:
+This is a teamwork project, so the data for face recognition is also our teamates:
+- Tam: with 100 croped face images
+- Nguyen: with 100 croped face images 
+- Thu: with 100 croped face images 
+
+## Technologies and techniques:
+- [dlib](http://dlib.net/): a state-of-the-art face recognition built with deep learning. The model has an accuracy of 99.38% on the [Labeled Faces in the Wild](http://vis-www.cs.umass.edu/lfw/) benchmark.
+- face_recognition: thís package built in dlib
+- tensorflow 2.6.0: I using diference of models: VGG16, EfficientNetB1, FR_MobileNetV2, ResNet50v2
+- OpenCV: to manipulate webcam and frames
+
+## Install:
+- Requirements:
+	- Python 3.3+
+	- macOS or Linux (Windows not officially supported, but might work)
+- Install Dlib: ```conda install -c conda-forge dlib```
+- Install face_recognition package: ```pip3 install face_recognition```
+
+
+## Result:
+### First approach: Using OpenCV, YOLO and Deep learning models:
+- I try to used 4 different models to see their differences: VGG16, EfficientNetB1, FR_MobileNetV2, ResNet50v2
+
+- These deep learning models all give pretty good results, with ~100% accuracy on validation data set:
 
 <p align="center">
-  <img src="https://cloud.githubusercontent.com/assets/896692/23625227/42c65360-025d-11e7-94ea-b12f28cb34b4.png" alt="Sublime's custom image"/>
-</p>
-  
-- Find and manipulate facial features in pictture:
-	Get locations and outlines of each person's eyes, nose, mouth and chin.
-	
-<p align="center">
-  <img src="https://cloud.githubusercontent.com/assets/896692/23625282/7f2d79dc-025d-11e7-8728-d8924596f8fa.png" alt="Sublime's custom image"/>
+  <img src="https://user-images.githubusercontent.com/87942072/135186481-ac3b8769-e675-4ede-9d23-dd2a802f2418.png" alt="Sublime's custom image"/>
 </p>
 
-- Connect with OpenCV for real-time face recognition:
+- When used on a webcam, this method can classify the members' faces. However, using YOLO models to detect faces and deep learning model to make prediction in sequence makes the processing speed of the webcam very slow (lag).
 
 <p align="center">
-  <img src="https://cloud.githubusercontent.com/assets/896692/24430398/36f0e3f0-13cb-11e7-8258-4d0c9ce1e419.gif" alt="Sublime's custom image"/>
+  <img src="https://user-images.githubusercontent.com/87942072/135188289-2093d858-3701-4c1d-b208-b24714ce94ed.png"/>
 </p>
 
-### Workflow:
+### Second approach: Using OpenCV, [face_recognition](https://github.com/ageitgey/face_recognition) package:
+- With this approach, the webcam speed has increased quite a lot when compared to the above first approach
+- The special thing is, we don't need too many images to train the model, each member I only take 2 images to train is enough to create a satisfy result.
+- If someones not belong to the trained dataset, it will labeled it "Ai vay?" (mean "Who?")
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/87942072/135027253-2ddbff24-3e06-4232-802c-acd92cca945d.png" alt="Sublime's custom image"/>
+  <img src="https://user-images.githubusercontent.com/87942072/135189202-fdb92f97-2098-441e-b4c4-490832639832.jpg"/>
 </p>
 
--------------------------------------------------
-## Image Detection with YOLOv3 & Classfication by DNN
+## Deploy app in streamlit
+### Face recognition:
 
-### Pre-trained models
-| Model name      | Training dataset |
-|-----------------|------------------|
-| Yolov3| COCO |
-| Xception| ImageNet|
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/87942072/135189620-85e58ec5-2ae5-4bcc-86ef-af28ae0dc916.png"/>
+</p>
 
-### Description
-This model uses Xception architecture for Transfer Learning, and is trained on 300 images of 3 classes using the last 27 layers in the network. The classifier is a Dense layer with activaiton = 'softmax'
+### Face make-up - nightmare! :):
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/87942072/135189932-e8e04c4f-60e5-43c6-bec0-43caf5de9769.png"/>
+</p>
 
-### Training Data
-300 images of 3 classes have been used for the purpose of training the classifier of this project. The image is taken with either a laptop's webcam or cell-phone and cropped so that only the faces are in the images
+### Face mask - Covid-19 mode:
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/87942072/135190144-76ad6048-d3aa-450b-88f8-3dcb65815e7d.png"/>
+</p>
 
-### Performance
-The accuracy for the final model is 100% 
+## Next steps:
+- Increase webcam speed by using multi-thresh techniques or reducing frame read
+- Make system more stable when working in low light condition
+
+
+
+
